@@ -1,0 +1,84 @@
+{
+  "name": "vscode-auto-writer",
+  "displayName": "Auto Writer",
+  "description": "Auto-write text character by character in VS Code",
+  "version": "0.0.1",
+  "publisher": "Nakous Mustapha",
+  "engines": {
+    "vscode": "^1.95.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:extension.autoWrite"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "extension.autoWrite",
+        "title": "Auto Write"
+      }
+    ],
+    "configuration": {
+      "title": "Auto Writer",
+      "properties": {
+        "autoWriter.writingSpeed": {
+          "type": "string",
+          "enum": [
+            "slow",
+            "normal",
+            "fast"
+          ],
+          "default": "normal",
+          "description": "Set the writing speed"
+        },
+        "autoWriter.waitingAfterCharList": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "number"
+              }
+            ],
+            "minItems": 2,
+            "maxItems": 2
+          },
+          "default": [],
+          "description": "List of characters and waiting times in milliseconds"
+        },
+        "autoWriter.autoFormatBeforeWriting": {
+          "type": "boolean",
+          "default": false,
+          "description": "Auto-format the document before writing"
+        }
+      }
+    },
+    "keybindings": [
+      {
+        "command": "extension.autoWrite",
+        "key": "ctrl+alt+v",
+        "mac": "cmd+alt+v"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.95.0",
+    "typescript": "^5.6.3",
+    "@typescript-eslint/eslint-plugin": "^5.0.0",
+    "@typescript-eslint/parser": "^5.0.0",
+    "eslint": "^8.0.0"
+  }
+}
